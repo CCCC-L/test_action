@@ -16,8 +16,13 @@ jobs:
           touch test/st
           echo "${GITHUB_REF#refs/heads/}"
 
+      - name: clone ak3
+        run: |
+          git clone https://github.com/CCCC-L/anyKernel3 releases
+          sed -i "s/{branch}/${{ github.ref_name }}/" releases/anykernel.sh
+
       - name: Upload boot
         uses: actions/upload-artifact@v4
         with:
           name: boot-${{ github.ref_name }}
-          path: test
+          path: releases
