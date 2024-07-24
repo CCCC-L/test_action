@@ -20,6 +20,7 @@ jobs:
         run: |
           git clone https://github.com/CCCC-L/anyKernel3 releases
           sed -i "s/{branch}/${{ github.ref_name }}/" releases/anykernel.sh
+          rm -rf .git
 
       - name: Upload boot
         uses: actions/upload-artifact@v4
