@@ -1,0 +1,23 @@
+name: build kernel
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: test
+        run: |
+          mkdir test
+          touch test/st
+          echo "${GITHUB_REF#refs/heads/}"
+
+      - name: Upload boot
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot-${GITHUB_REF#refs/heads/}
+          path: test
